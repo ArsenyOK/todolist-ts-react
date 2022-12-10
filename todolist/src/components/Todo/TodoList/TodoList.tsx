@@ -1,7 +1,9 @@
 import { useCallback, useMemo, useState } from "react";
 import AddTodoItem from "../AddTodoItem/AddTodoItem";
+import { CloseBtn } from "../AddTodoItem/styled/AddTodoItemStyled";
 import TodoItem from "../TodoItem/TodoItem";
 import { TTodoItem } from "../todoTypes/todo.types";
+import { TodoContainer } from "./styled/TodoItemStyled";
 
 const TodoList = () => {
   const todoArray = useMemo(
@@ -51,29 +53,33 @@ const TodoList = () => {
   );
 
   return (
-    <div>
-      <button onClick={() => setToggleAdd((prev) => !prev)}>
-        {toggleAdd ? "Close block" : "Add new item"}
-      </button>
-      {toggleAdd && (
-        <AddTodoItem
-          setToggleAdd={setToggleAdd}
-          todo={todo}
-          setTodo={setTodo}
-        />
-      )}
-      {todo &&
-        todo.map((item) => {
-          return (
-            <TodoItem
-              key={item.id}
-              item={item}
-              completedTodoItem={completedTodoItem}
-              removeTodoItem={removeTodoItem}
-            />
-          );
-        })}
-    </div>
+    <TodoContainer>
+      <div>
+        <CloseBtn onClick={() => setToggleAdd((prev) => !prev)}>
+          {toggleAdd ? "✖" : "✚"}
+        </CloseBtn>
+        {toggleAdd && (
+          <AddTodoItem
+            setToggleAdd={setToggleAdd}
+            todo={todo}
+            setTodo={setTodo}
+          />
+        )}
+      </div>
+      <div>
+        {todo &&
+          todo.map((item) => {
+            return (
+              <TodoItem
+                key={item.id}
+                item={item}
+                completedTodoItem={completedTodoItem}
+                removeTodoItem={removeTodoItem}
+              />
+            );
+          })}
+      </div>
+    </TodoContainer>
   );
 };
 

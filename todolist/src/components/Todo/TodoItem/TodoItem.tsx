@@ -1,4 +1,9 @@
 import React from "react";
+import {
+  BtnComplte,
+  BtnRemove,
+  TodoItemStyled,
+} from "../TodoList/styled/TodoItemStyled";
 import { ITodoItemComponent } from "../todoTypes/todo.types";
 
 const TodoItem: React.FC<ITodoItemComponent> = ({
@@ -9,13 +14,13 @@ const TodoItem: React.FC<ITodoItemComponent> = ({
   const { id, action, completed } = item;
 
   return (
-    <div>
-      <button onClick={() => removeTodoItem(id)}>remove</button>
-      {action}
-      <button onClick={() => completedTodoItem(id)}>
-        {completed ? "Completed" : "Uncompleted"}
-      </button>
-    </div>
+    <TodoItemStyled completed={completed}>
+      <BtnRemove onClick={() => removeTodoItem(id)}>&#10006;</BtnRemove>
+      <div>{action}</div>
+      <BtnComplte onClick={() => completedTodoItem(id)}>
+        {completed ? "✔" : `❑`}
+      </BtnComplte>
+    </TodoItemStyled>
   );
 };
 

@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 import { IAddTodoItem, TTodoItem } from "../todoTypes/todo.types";
+import {
+  AddTodoBox,
+  AddTodoStyledBtnAdd,
+  AddTodoStyledInput,
+} from "./styled/AddTodoItemStyled";
 
 const AddTodoItem: React.FC<IAddTodoItem> = ({
   setTodo,
@@ -24,20 +29,21 @@ const AddTodoItem: React.FC<IAddTodoItem> = ({
         completed: false,
       };
       setTodo((prev: any) => [...prev, newItem]);
-      setToggleAdd(false);
       setTodoName("");
     }
   };
   return (
-    <>
-      <input
+    <AddTodoBox>
+      <AddTodoStyledInput
         type="text"
         placeholder="Fill your todo action"
         onChange={(e) => onChangeTodoName(e)}
         value={todoName}
       />
-      <button onClick={() => addNewTodo()}>Add todo</button>
-    </>
+      <AddTodoStyledBtnAdd onClick={() => addNewTodo()}>
+        &#10010;
+      </AddTodoStyledBtnAdd>
+    </AddTodoBox>
   );
 };
 
